@@ -1,0 +1,19 @@
+### TEST GET / WEBSITE 
+GET http://localhost:3000
+
+### TEST GET / DASHBOARD
+GET http://localhost:3000/dashboard
+
+### TEST DATA ENDPOINT
+GET http://localhost:3000/api/data
+
+### DATA ENDPOINT FOR ADDING A USER 
+POST http://localhost:3000/api/data
+Content-Type: application/json
+
+{
+    "name": "chai"
+}
+
+### DATA ENDPOINT FOR DELETING A USER 
+DELETE http://localhost:3000/api/data
