@@ -1,31 +1,35 @@
 ### REGISTER ENDPOINT
 POST http://localhost:5000/auth/register
-
 Content-Type: application/json
 
 {
-    "email": "enzo@gmail.com",
+    "username": "enzo@gmail.com",
     "password": "password"
 }
 
 ### LOGIN ENDPOINT
 POST http://localhost:5000/auth/login
-
 Content-Type: application/json
 
 {
-    "email": "enzo@gmail.com",
+    "username": "enzo@gmail.com",
     "password": "password"
 }
 
 ### GET TODOS 
-GET http://localhost:5000/todo
+GET http://localhost:5000/todos
 
 ### POST TODOS 
-POST http://localhost:5000/todo
+POST http://localhost:5000/todos
+Content-Type: application/json
+
+{
+    "username": "enzo@gmail.com",
+    "password": "password"
+}
 
 ### DELETE TODO
-DELETE http://localhost:5000/todo
+DELETE http://localhost:5000/todos/1
 
 ### PUT TODOS 
-PUT http://localhost:5000/todo
+PUT http://localhost:5000/todos/1

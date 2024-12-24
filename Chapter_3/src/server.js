@@ -30,7 +30,7 @@ app.get("/", (req, res) => {
 })
 
 app.use('/auth', authRoutes); //Uses the router object to handle all requests to the /auth route 
-app.use('/todo', todoRoutes) //Uses the todo object to handle all requests to the /todo route 
+app.use('/todos', todoRoutes) //Uses the todo object to handle all requests to the /todo route 
 
 app.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);
