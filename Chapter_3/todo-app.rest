@@ -1,0 +1,31 @@
+### REGISTER ENDPOINT
+POST http://localhost:5000/auth/register
+
+Content-Type: application/json
+
+{
+    "email": "enzo@gmail.com",
+    "password": "password"
+}
+
+### LOGIN ENDPOINT
+POST http://localhost:5000/auth/login
+
+Content-Type: application/json
+
+{
+    "email": "enzo@gmail.com",
+    "password": "password"
+}
+
+### GET TODOS 
+GET http://localhost:5000/todo
+
+### POST TODOS 
+POST http://localhost:5000/todo
+
+### DELETE TODO
+DELETE http://localhost:5000/todo
+
+### PUT TODOS 
+PUT http://localhost:5000/todo

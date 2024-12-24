@@ -178,7 +178,7 @@
         // access email and pass values
         const emailVal = email.value
         const passVal = password.value
-
+        
         // guard clauses... if authenticating, return
         if (
             isLoading ||
@@ -196,6 +196,7 @@
 
         try {
             let data
+            console.log('pressed submit')
             if (isRegistration) {
                 // register an account
                 const response = await fetch(apiBase + 'auth/register', {
