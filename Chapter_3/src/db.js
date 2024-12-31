@@ -1,5 +1,5 @@
-import {DatabaseSync} from 'node:sqlite'
-const db = new DatabaseSync(':memory:');
+import { DatabaseSync } from "node:sqlite";
+const db = new DatabaseSync(":memory:");
 
 //Execute SQL statements from strings
 db.exec(`
@@ -8,7 +8,7 @@ db.exec(`
         username TEXT UNIQUE,
         password TEXT
     )
-`)
+`);
 
 db.exec(`
     CREATE TABLE todo(
@@ -18,6 +18,6 @@ db.exec(`
         completed BOOLEAN DEFAULT 0,
         FOREIGN KEY(user_id) REFERENCES user(id) 
     )
-    `)
+    `);
 
-export default db
+export default db;
