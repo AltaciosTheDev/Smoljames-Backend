@@ -1,75 +1,270 @@
 <!-- 
 SMOLJAMES BACKEND TUTORIAL 
 
-CHAPTER 1
-    TECH:
-        1)node
-        2)express
-        3)prisma
-        4)sequelize
-        4)docker
-        5)postgresql
+---CHAPTER 1---
+TECH:
+    1)node
+    2)express
+    3)prisma
+    4)sequelize
+    4)docker
+    5)postgresql
 
 
-    DOES 3 THINGS:
-        1)Beginner friendly 
-        2)All core concepts and foundations
-        3)Projects for portfolio 
+DOES 3 THINGS:
+    1)Beginner friendly 
+    2)All core concepts and foundations
+    3)Projects for portfolio 
 
-    4 CHAPTERS:
-        1)Open brain to full stack and back end 
-        2)Rudimentary backend app in full form 
-        3)Complete back end app
-            a)comprehensive db interaction(sequelize)
-            b)authentication
-        4)Complete back end app
-            a)postgresql
-            b)prisma
-            c)docker
+4 CHAPTERS:
+    1)Open brain to full stack and back end 
+    2)Rudimentary backend app in full form 
+    3)Complete back end app
+        a)comprehensive db interaction(sequelize)
+        b)authentication
+    4)Complete back end app
+        a)postgresql
+        b)prisma
+        c)docker
 
-    PREREQUISITES
-        1)js
+PREREQUISITES
+    1)js
 
-    PROCESS OF REQUEST
-        Browser sends a request through the network to an address to where it needs information from(URL).
-        URL is located(hosted) in a server(another computer) connected to the internet.
-        URL is converted to an address via DNS.
-        Ip address is the id of every device on a network. 
+PROCESS OF REQUEST
+    Browser sends a request through the network to an address to where it needs information from(URL).
+    URL is located(hosted) in a server(another computer) connected to the internet.
+    URL is converted to an address via DNS.
+    Ip address is the id of every device on a network. 
 
-    FULL STACK 
-        Result of the combination of pieces necessary for the full internet experience. 
+FULL STACK 
+    Result of the combination of pieces necessary for the full internet experience. 
 
-        Front End
-            Website loaded from the back end and requested by the front end, the actual code files that have the site and build it up by the browser.
-            Summarized in:
-                1)user
-                2)client(browser)
-                    Medium to interact with the internet
-        
-        Back End 
-            Logic on the server side concentrated on listening to requests from the client side and readies the responses to send back with data or resources. 
+    Front End
+        Website loaded from the back end and requested by the front end, the actual code files that have the site and build it up by the browser.
+        Summarized in:
+            1)user
+            2)client(browser)
+                Medium to interact with the internet
+    
+    Back End 
+        Logic on the server side concentrated on listening to requests from the client side and readies the responses to send back with data or resources. 
 
-CHATPER 2
-    Package JSON
-        Glorified json object that tells us what our project is about and contains all specs about the project.
+---CHATPER 2---
+Package JSON
+    Glorified json object that tells us what our project is about and contains all specs about the project.
 
-    EXPRESS
-        Node package specifically designed to make fast uncomplicated servers.
+EXPRESS
+    Node package specifically designed to make fast uncomplicated servers.
 
-    SCRIPT
-        Set of instructions to get server up and running
+SCRIPT
+    Set of instructions to get server up and running
 
-    NODEMON
-        NPM dev dependency that is looking for changes in the server file and restarts the server every time there is a change. 
+NODEMON
+    NPM dev dependency that is looking for changes in the server file and restarts the server every time there is a change. 
 
-    REST EXTENSION
-        Extension that lets you emulate sending http requests very easy without the need of a third party app.
+REST EXTENSION
+    Extension that lets you emulate sending http requests very easy without the need of a third party app.
+
+MIDDLEWARE
+    Config slammed in between request and response.
+
+---CHAPTER 3---
+Objective:
+    1)Serve public files
+    2)Path and URL modules
+
+WHAT IS?    
+    To do app with auth protection.
+
+SQLite
+    Lightweight, self-contained, serverless db engine widely used for applications needing a simple, efficient and reliable way to store and manage data. 
+
+    WHAT
+        Database engine
+            RDBMS that follows SQL for managing data.
+        Serverless
+            unlike MySQL or PostgreSQL does not require a separate server. Operates directly on a database file.
+        File Based
+            All data, including tables, indexes, schemas are stored in a single .sqlite or .db file.
+        Lightweight
+            Size < 1mb
+            Requires minimal setup
+        Cross-Platform
+            Works on virtually any platform, desktop to mobile.
+    WHY
+        Ease   
+            No config or install needed, just include the SQLite library and start working.
+            Ideal for beginners
+        Embedded
+            Can be directly embedded into an application
+        Fast 
+            Optimized for performance
+            ACID compliant
+        Free & Open Source
+            Source code is in the public domain
+        Use Cases
+            Small-scale projects or prototyping before moving to larger database
+
+    HOW
+        Database File
+            Operates on a single file. "my_database.sqlite" contains all your data.
+        SQL Syntax
+            Uses standard SQL to interact with database.
+        Programming Interface 
+            accessed via:
+                CLI
+                Integrated into programming language
+                
+NVM
+    Tool used to manage multiple versions of node in a single system. 
+
+    WHY
+        Multiple Projects
+            Different projects may require different versions of node.
+        Testing
+            Test compatibility with different versions of node.
+        Stability
+            Ensure stability by using a specific version of node.   
+
+    COMMANDS
+        nvm install <version>
+            Installs a specific version of node.
+        nvm use <version>
+            Switches to a specific version of node.
+        nvm ls
+            Lists all installed versions of node.
+        nvm uninstall <version>
+            Uninstalls a specific version of node.
+.env
+    Simple file that stores environment variables in key - value format. Typically used to store sensitive information like API keys, passwords, etc.   
+
+    STRUCTURE
+        db settings
+        api keys 
+
+PROJECT STRUCTURE
+    src
+        server
+        routes
+        controller
+        db
+    public
+        html and static files
+    .env
+    .gitignore
+    .rest
+    package.json
+
+ENDPOINTS
+    serve a website 
+    auth
+    CRUD 
+
+BCRYPTJS
+    Library that helps you hash passwords.
+
+    HOW IT HELPS
+        Does all the heavy math encryption for you.
+
+JSONWEBTOKEN
+    Library that helps you create and verify tokens.
+
+    HOW IT HELPS
+        Creates a token that can be used to authenticate a user.
+
+FLAGS
+    --watch(nodemon)
+        Watches for changes in the file and restarts the server.
+    --experimental-sqlite
+        Allows you to use sqlite in a more experimental way.
+    --experimental-strip-types
+        Removes types from the database.
+    --env-file=.env(dotenv)
+        Allows you to use the .env file in the project.
+PUBLIC
+    Folder that contains all the static files for the project.
+
+    IN THE PROGRAM STRUCTURE
+        Contains all the html, css, js files.
+
+    IN THE HTTP REQUEST
+        Contains all the files that are sent to the client.
+
+PATH MODULE 
+    The path module provides utilities to work with file paths, such as combining directories and filenames into a valid path, regardless of the operating system.
+
+URL MODULE 
+    The url module is used to work with URLs. In this code, the function fileURLToPath converts a file:// URL (like import.meta.url) into a filesystem path.
+
+What are __filename and __dirname?
+    __filename: Represents the absolute path to the current file.
+    __dirname: Represents the absolute path to the directory containing the current file.
+
+Why Absolute Paths in Servers?:
+    Servers need to know exactly where files are located on the disk to serve them.
+    Relative paths can cause issues depending on where the server is run from
+
+app.use(express.static(path.join(__dirname, '../public')));
+    Tells Express to serve all files in the public directory as static assets.
+    Example: 
+        If a user requests /styles.css, Express will look for styles.css in the public folder.
+        This generates an absolute path to the public directory.
+path.join	
+	Combines multiple path segments into one valid path.
+__dirname	
+    Absolute path to the directory of the current file.
+fileURLToPath	
+    Converts a file URL (from import.meta.url) to a filesystem path.
+Static Middleware	
+    Serves static files (CSS, images, etc.) from a specified folder.
+Absolute Path	
+    A full path from the root directory.
+Relative Path	
+    A path relative to the current location in the filesystem or codebase.
+res.sendFile	
+    Sends an HTML file (or any file) to the client.
+
+What Happens When the Server Runs?
+    A user accesses your app in the browser (e.g., http://localhost:5000/).
+The server:
+    Matches the / route and serves index.html from the public folder.   
+If the HTML references files (e.g., CSS, JS):
+    The browser requests these files (e.g., GET /styles.css).
+    The static middleware serves these files from the public folder.
+
+AUTH ENDPOINT 
+    An endpoint that requires a user to be authenticated to access it.
+
+    WHY
+        Protects sensitive data from unauthorized access.
+        Ensures that only authenticated users can access certain routes.
+        Allows users to log in and access their data.
+
+    HOW
+        Use middleware to check if a user is authenticated.
+        If the user is authenticated, allow access to the route.
+        If the user is not authenticated, return an error message.
+
+    ROUTER OBJECT
+        A router object is an instance of the Express Router class.
+        It allows you to create modular, mountable route handlers.
+        You can use router objects to define routes in separate files and then use them in your main app.
 
     MIDDLEWARE
-        Config slammed in between request and response.
+        Middleware is a function that has access to the request and response objects.
+        It can modify the request and response objects, end the request-response cycle, or call the next middleware function.
+        Middleware can be used to perform tasks like authentication, logging, error handling, etc.
 
-    
+    PROCESS
+        1) We are using the bcryptjs package to hash the password before storing it in the database.
+        2) We are using the jsonwebtoken package to generate a token when the user logs in.
+        3) We are using the db object to interact with the database.
+        4) We are using the express.Router() method to create a new router object.
+
+TODO ROUTER 
     
 
-    
+
+
+---CHAPTER 4---
 -->
