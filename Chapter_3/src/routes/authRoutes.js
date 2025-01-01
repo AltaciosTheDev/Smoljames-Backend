@@ -25,9 +25,9 @@ router.post("/register", (req, res) => {
     //now that we have a user, I want to add their first todo for them
     const defaultTodo = "Hello :) Add your first todo!";
     const insertTodo = db.prepare(
-      `INSERT INTO todo(todo, user_id) VALUES(?,?)`
+      `INSERT INTO todos(user_id,task) VALUES(?,?)`
     );
-    insertTodo.run(defaultTodo, result.lastInsertRowid);
+    insertTodo.run(result.lastInsertRowid,defaultTodo);
 
     //create a token
     const token = jwt.sign(
@@ -35,7 +35,7 @@ router.post("/register", (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "24h" }
     );
-    res.status(201).json({user: result.lastInsertRowid, token})
+    res.status(201).json({token})
   } catch (err) {
     console.log(err.message);
     res.status(503);
@@ -60,14 +60,16 @@ router.post("/login", (req, res) => {
     //2.b) - if user found -> compare string to hased user password from db
     console.log(user)
     const passwordIsValid = bcrypt.compareSync(password, user.password)
+    
+    //3) compare password
 
-    //2.b.a - invalid password -> exit / return from function
+    //3.a - invalid password -> exit / return from function
     if(!passwordIsValid){ //wrong password input(!verb)
         return res.status(401).send({message: "Invalid password!"})
     }
-    //2.b.b - valid password(succesful auth)
+    //3.b - valid password(succesful auth)
 
-    //3)create token
+    //4)create token
     const token = jwt.sign({id: user.id}, process.env.JWT_SECRET, {expiresIn: '24h'})
     res.json({token})
 

@@ -291,7 +291,7 @@
 
         if (!task) { return }
 
-        await fetch(apiBase + 'todos', {
+        await fetch(apiBase + 'todos', { //send new todo to database
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -299,8 +299,8 @@
             },
             body: JSON.stringify({ task })
         })
-        todoInput.value = ''
-        fetchTodos()
+        todoInput.value = '' 
+        fetchTodos() //fetch all todos and new one
     }
 
     // UTILITY FUNCTIONS
