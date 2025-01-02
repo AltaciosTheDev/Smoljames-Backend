@@ -6,7 +6,7 @@ import db from "../db.js"; //Import the database connection
 const router = express.Router(); //Creates a new router object
 
 //Register a new user endpoint /auth/register
-router.post("/register", (req, res) => {
+router.post("/register", async (req, res) => {
   console.log("Register endpoint called");
   const { username, password } = req.body; //Destructure the username and password from the request body
   //save the username and an irreversibly encrypted password
@@ -17,17 +17,21 @@ router.post("/register", (req, res) => {
 
   //save the user and password to db
   try {
-    const insertUser = db.prepare(
-      `INSERT INTO user(username, password) VALUES(?, ?)`
-    ); //prepares and avoids sql injection
-    const result = insertUser.run(username, hashedPassword); //communicates with the db and returns the result
+    const user = await prisma.user.create({
+      data: {
+        username,
+        password: hashedPassword
+      }
+    })
 
     //now that we have a user, I want to add their first todo for them
     const defaultTodo = "Hello :) Add your first todo!";
-    const insertTodo = db.prepare(
-      `INSERT INTO todos(user_id,task) VALUES(?,?)`
-    );
-    insertTodo.run(result.lastInsertRowid,defaultTodo);
+    await prisma.todo.create({
+      data:{
+        task: defaultTodo,
+        userId: user.id
+      }
+    })
 
     //create a token
     const token = jwt.sign(
@@ -43,16 +47,18 @@ router.post("/register", (req, res) => {
 });
 
 //Login an existing user endpoint /auth/login
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
   console.log("Login endpoint called");
   //1)Get email and password
   const {username,password} = req.body
   
   try{
     //2)get user associated to email 
-    const getUser = db.prepare(`SELECT * FROM user WHERE username = ?`)
-    const user = getUser.get(username) //returns the first result as an object, else undefined.
-
+    const user = await prisma.user.findUnique({
+      where:{
+        username: username
+      }
+    })
     // 2.a) - if user not found -> exit / return from function
     if(!user){
         return res.status(404).send({message:"User not found!"})
