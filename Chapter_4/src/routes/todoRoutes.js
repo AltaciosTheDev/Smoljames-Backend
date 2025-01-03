@@ -1,59 +1,56 @@
 import express from "express";
-import db from '../db.js'
-import { get } from "http";
+import prisma from "../prismaClient.js"
+
 
 const router = express.Router();
 
 //READ all todos for logged-in user
-router.get('/all', (req, res) => {
-  console.log(`called the all endpoint`)
-  const getAllTodos = db.prepare(`SELECT * FROM todos`)
-  const todos = getAllTodos.all()
-  console.log(todos)
+router.get('/', async(req, res) => {
+  const todos = await prisma.todo.findMany({
+    where:{
+      userId: req.userId
+    }
+  })
   res.status(200).json(todos)
 })
 
-router.get("/", (req, res) => {
-  const getTodos = db.prepare(`SELECT * FROM todos WHERE user_id=?`) //filter and get only todos where user_id matches the id in the token payload
-  //req.userId b/c middleware will handle and include the userId in the request if successful
-  const todos = getTodos.all(req.userId) //all returns all records, get returns only 1!  
-  console.log(todos)
-  res.status(200).json(todos)
-});
-
 //CREATE a new todo
-router.post("/", (req, res) => {
-  console.log("POST todo endpoint called");
+router.post("/", async (req, res) => {
   const {task} = req.body
-
-    const insertTodo = db.prepare(`INSERT INTO todos (user_id, task) VALUES(?,?)`)
-    const result = insertTodo.run(req.userId, task)
-    res.status(200).json({todoId: result.lastInsertRowid, task: task, completed: 0})
-});
-
-//READ individual todos for logged-in user
-router.get("/:id", (req, res) => {
-
+  const todo = await prisma.todo.create({
+    data:{
+      userId: req.userId,
+      task: task
+    }
+  })
+  res.status(200).json({todoId: result.lastInsertRowid, task: task, completed: 0})
 });
 
 //UPDATE a new todo
-router.put("/:id", (req, res) => {
-  console.log("PUT  todo endpoint called");
+router.put("/:id", async (req, res) => { //never forget to make the handlers async since it connects to the db
   const {completed} = req.body
   const {id} = req.params
 
-  const updatedTodo = db.prepare(`UPDATE todos SET completed = ? WHERE id = ?`)
-  updatedTodo.run(completed, id)
-  res.status(200).json({message: "Todo completed"})
+  const updatedTodo = await prisma.todo.update({
+    where:{
+      id: parseInt(id),
+      userId: req.userId
+    },
+    data: {completed: !!completed}
+  })
+  res.status(200).json(updatedTodo)
 });
 
 //DELETE a new todo
-router.delete("/:id", (req, res) => {
-  console.log("DELETE todo endpoint called");
+router.delete("/:id", async (req, res) => {
   const {id} = req.params
-
-  const deleteTodo = db.prepare(`DELETE FROM todos WHERE id = ? AND user_id = ?`)
-  deleteTodo.run(id, req.userId)
+  
+  await prisma.todo.delete({
+    where:{
+      id: parseInt(id),
+      userId: req.userId
+    }
+  })
   res.status(200).json({message: "Todo DELETED"})
 });
 

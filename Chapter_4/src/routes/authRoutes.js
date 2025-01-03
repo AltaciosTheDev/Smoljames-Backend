@@ -1,7 +1,7 @@
 import express from "express";
 import bcrypt from "bcryptjs"; //Import the bcryptjs package
 import jwt from "jsonwebtoken"; //Import the jsonwebtoken package
-import db from "../db.js"; //Import the database connection
+import prisma from "../prismaClient.js"
 
 const router = express.Router(); //Creates a new router object
 
@@ -17,7 +17,7 @@ router.post("/register", async (req, res) => {
 
   //save the user and password to db
   try {
-    const user = await prisma.user.create({
+    const user = await prisma({
       data: {
         username,
         password: hashedPassword
